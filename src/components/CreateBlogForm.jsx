@@ -31,10 +31,11 @@ const CreateBlogForm = ({ onClose, onSuccess }) => {
             case 'description':
                 if (!value.trim()) return 'Description is required';
                 if (value.trim().length < 10) return 'Description must be at least 10 characters';
-                if (value.trim().length > 1000) return 'Description must be less than 1000 characters';
+                if (value.trim().length > 100) return 'Description must be less than 1000 characters';
                 return '';
             case 'image':
-                if (!value) return 'Image is required';
+                // Only validate if a value was actually provided
+                if (!value) return '';
                 const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
                 if (!validTypes.includes(value.type)) {
                     return 'Please upload a valid image file (jpg, jpeg, png, or gif)';
@@ -50,12 +51,16 @@ const CreateBlogForm = ({ onClose, onSuccess }) => {
 
     const handleBlur = (e) => {
         const { name } = e.target;
+        
+        // Don't mark image as touched on blur - we'll handle this in handleFileChange
+        if (name === 'image') return;
+        
         setTouched(prev => ({
             ...prev,
             [name]: true
         }));
         
-        const value = name === 'image' ? formData.image : e.target.value;
+        const value = e.target.value;
         const error = validateField(name, value);
         setErrors(prev => ({
             ...prev,
@@ -88,6 +93,7 @@ const CreateBlogForm = ({ onClose, onSuccess }) => {
                 image: file
             }));
             
+            // Only now mark as touched and validate
             const error = validateField('image', file);
             setErrors(prev => ({
                 ...prev,
@@ -107,7 +113,7 @@ const CreateBlogForm = ({ onClose, onSuccess }) => {
         const newErrors = {
             title: validateField('title', formData.title),
             description: validateField('description', formData.description),
-            image: validateField('image', formData.image)
+            image: formData.image ? validateField('image', formData.image) : 'Image is required'
         };
         
         setErrors(newErrors);
@@ -213,7 +219,6 @@ const CreateBlogForm = ({ onClose, onSuccess }) => {
                             name="image"
                             accept="image/*"
                             onChange={handleFileChange}
-                            onBlur={handleBlur}
                             className={`mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 ${
                                 touched.image && errors.image 
                                     ? 'border-red-300' 
