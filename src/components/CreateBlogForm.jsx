@@ -131,7 +131,7 @@ const CreateBlogForm = ({ onClose, onSuccess }) => {
             formDataToSend.append('description', formData.description);
             formDataToSend.append('image', formData.image);
 
-            await axiosInstance.post('/blogs/create-blog', formDataToSend);
+            await axiosInstance.post('/blogs/createBlog', formDataToSend);
             
             if (previewImage) {
                 URL.revokeObjectURL(previewImage);

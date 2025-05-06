@@ -5,6 +5,7 @@ import SignupForm from './SignUp';
 import Dashboard from './Dashboard';
 import PrivateRoute from './PrivateRoute';
 import { useUser } from '../context/UserContext';
+import BlogView from './BlogView';
 
 const AllRoute = () => {
     const { user } = useUser();
@@ -24,6 +25,7 @@ const AllRoute = () => {
                     </PrivateRoute>
                 }
             />
+            <Route path="/blog/view" element={<BlogView />} />
         </Routes>
     );
 };
