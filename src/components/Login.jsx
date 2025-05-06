@@ -94,7 +94,7 @@ const LoginForm = () => {
                         name="email"
                         value={formData.email}
                         onChange={handleInputChange}
-                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 px-4 py-2"
                         placeholder="Enter your email"
                     />
                     {errors.email && (
@@ -110,7 +110,7 @@ const LoginForm = () => {
                             name="password"
                             value={formData.password}
                             onChange={handleInputChange}
-                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 pr-10"
+                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 pr-10 px-4 py-2"
                             placeholder="Enter your password"
                         />
                         <button
@@ -133,8 +133,15 @@ const LoginForm = () => {
                     {errors.password && (
                         <p className="mt-1 text-sm text-red-600">{errors.password}</p>
                     )}
+                    <button
+                        type="button"
+                        onClick={() => navigate('/forgot-password')}
+                        className="text-sm text-indigo-600 hover:text-indigo-500 mt-1 float-right"
+                    >
+                        Forgot your password?
+                    </button>
                 </div>
-
+<br />
                 {errors.submit && (
                     <p className="text-sm text-red-600">{errors.submit}</p>
                 )}
@@ -161,7 +168,7 @@ const LoginForm = () => {
                         <button
                             type="button"
                             onClick={() => navigate('/signup')}
-                            className="text-indigo-600 hover:text-indigo-500"
+                            className="text-indigo-600 hover:text-indigo-500 font-medium"
                         >
                             Sign up
                         </button>

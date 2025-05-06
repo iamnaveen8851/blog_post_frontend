@@ -211,6 +211,16 @@ const SignupForm = () => {
                             )}
                         </button>
                     </div>
+                    <div className="mt-1 text-xs text-gray-500">
+                        Password must contain:
+                        <ul className="list-disc pl-5 space-y-1">
+                            <li>At least 6 characters</li>
+                            <li>One uppercase letter</li>
+                            <li>One lowercase letter</li>
+                            <li>One number</li>
+                            <li>One special character (@$!%*?&)</li>
+                        </ul>
+                    </div>
                     {errors.password && (
                         <p className="mt-1 text-sm text-red-600">{errors.password}</p>
                     )}
