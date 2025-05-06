@@ -264,6 +264,19 @@ const SignupForm = () => {
                         'Sign Up'
                     )}
                 </button>
+
+                <div className="text-center mt-4">
+                    <p className="text-sm text-gray-600">
+                        Already have an account?{' '}
+                        <button
+                            type="button"
+                            onClick={() => navigate('/login')}
+                            className="text-indigo-600 hover:text-indigo-500 font-medium"
+                        >
+                            Login
+                        </button>
+                    </p>
+                </div>
             </form>
         </div>
     );

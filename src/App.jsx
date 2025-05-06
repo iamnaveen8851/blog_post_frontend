@@ -11,7 +11,7 @@ function App() {
   return (
     <UserProvider>
       <>
-        <Navbar/>
+       
         <AllRoute/>
       </>
     </UserProvider>
